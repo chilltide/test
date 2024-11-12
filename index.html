@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZOMBO</title>
+<link href="zombo.css" rel="stylesheet" type="text/css">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+
+<script src="script.js"></script>
+
+<body>
+ 
+<!-- 言語選択オーバーレイ -->
+<div id="language-overlay" class="overlay">
+    <div class="overlay-content">
+      <h2>Choose your language</h2>
+      <div class="language-options">
+        <img src="images/jp.webp" alt="Japanese" onclick="selectLanguage('ja')">
+        <img src="images/en.webp" alt="English" onclick="selectLanguage('en')">
+        <img src="images/kr.webp" alt="Korean" onclick="selectLanguage('ko')">
+      </div>
+    </div>
+  </div>
+
+<div align="center">
+  <img src="images/title.webp" id="title-image" alt="Title Image" />
+</div>
+
+<div align="center">
+  <div class="animate-flicker">
+    <img src="images/donut.webp" id="donut" class="rotate" onclick="changedonutImage()" alt="donut Image">
+  </div>
+</div>
+
+<audio id="audio" loop src="audio/welcom.mp3" type="audio/mpeg"></audio>
+<button id="audio-button">
+  <i class="fa fa-volume-up"></i>
+</button>
+
+<div id="egg-container" style="display: none;">
+  <img src="images/egg.webp" id="egg" alt="Egg Image">
+</div>
+
+<div id="message" class="message" style="display: none;">
+  Just leave！！！
+  <span class="red">NOW!</span>
+</div>
+
+<script>
+// オーディオとボタンの設定
+const button = document.querySelector("#audio-button");
+const icon = document.querySelector("#audio-button > i");
+const audio = document.querySelector("#audio");
+let eggTimer;
+
+
+
+
+
+// オーディオ再生ボタンのクリックイベント
+button.addEventListener("click", () => {
+  if (audio.paused) {
+    audio.volume = 0.2;
+    audio.play();
+    icon.classList.remove('fa-volume-up');
+    icon.classList.add('fa-volume-off');
+    
+    // 2分19秒(139秒)後にイースターエッグを表示
+    eggTimer = setTimeout(showEasterEgg, 139000);
+  } else {
+    audio.pause();
+    icon.classList.remove('fa-volume-off');
+    icon.classList.add('fa-volume-up');
+
+    // オーディオ停止時にはタイマーをリセット
+    clearTimeout(eggTimer);
+  }
+});
+
+// イースターエッグ表示関数
+function showEasterEgg() {
+  const eggContainer = document.querySelector("#egg-container");
+  eggContainer.style.display = "block";
+  eggContainer.onclick = showMessage;
+}
+
+// イースターエッグをクリック時のメッセージ表示関数
+function showMessage() {
+  document.body.style.backgroundColor = "black";
+  const message = document.querySelector("#message");
+  message.style.display = "block";
+}
+
+// クリックでケーキ画像を順次変更
+let currentdonut = 0;
+const donutImages = [
+  "images/donut.webp", "images/donut1.webp", "images/donut2.webp",
+  "images/donut3.webp", "images/donut4.webp", "images/donut5.webp",
+  "images/donut6.webp", "images/donut7.webp", "images/donut8.webp",
+  "images/donut9.webp", "images/donut10.webp"
+];
+
+function changedonutImage() {
+  currentdonut = (currentdonut + 1) % donutImages.length;
+  document.getElementById("donut").src = donutImages[currentdonut];
+}
+</script>
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,235 @@
+@charset "utf-8";
+
+/* 全ての要素に対してタッチ時やクリック時の青い枠を削除 */
+*,
+*:focus,
+*:active {
+  outline: none;  /* フォーカス時の青い枠を削除 */
+  border: none;   /* ボーダーを削除 */
+}
+
+/* 画像をクリックしたときの青い枠を消す */
+#donut,
+#donut:focus,
+#donut:active,
+#donut img {
+  outline: none;
+  border: none;
+  -webkit-tap-highlight-color: transparent; /* タッチ時のハイライトを消す */
+  cursor: pointer;
+}
+
+/* 画像のクリック時にスムーズな遷移 */
+#donut img {
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* 画像のレスポンシブ調整 */
+img { 
+  max-width: 100%; 
+  height: auto; 
+}
+
+/* 全体の背景色 */
+body {
+  background-color: pink;
+  font: 100%/1.4 Verdana, Arial, Helvetica, sans-serif;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+/* タイトル画像 */
+#title-image {
+  width: 100%;      /* 画面の幅に合わせて最大化 */
+  max-width: 800px; /* PC画面では最大800pxまで表示 */
+  height: auto;     /* 高さは自動調整 */
+  margin-top: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ケーキ画像 */
+#donut {
+  width: 100%;      /* 画面の幅に合わせて最大化 */
+  max-width: 300px; /* PC画面では最大300pxまで表示 */
+  height: auto;     /* 高さは自動調整 */
+  cursor: pointer;  /* クリック可能 */
+  margin-top: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* イースターエッグ画像 */
+#egg {
+  width: 100%;
+  max-width: 150px; /* 最大150px */
+  height: auto;
+  cursor: pointer;
+  margin-top: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* BGMボタン */
+#audio-button {
+  font-size: 22px;
+  color: #eee;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 40px;
+  height: 40px;
+  padding: 5px;
+  border: none;
+  border-radius: 2px;
+  outline: none;
+  background: black;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  opacity: 0.8;
+  cursor: pointer;
+  transition: all 0.4s ease-out;
+}
+
+#audio-button.fade:hover {
+  opacity: 0.8;
+}
+
+.fade {
+  opacity: 0.2;
+}
+
+/* 言語選択オーバーレイのスタイル */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.overlay-content {
+  text-align: center;
+  color: white;
+}
+
+.overlay-content h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.language-options img {
+  width: 80px;
+  height: 80px;
+  margin: 10px;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.language-options img:hover {
+  transform: scale(1.1);
+}
+
+/* メッセージのスタイル */
+.message {
+  position: absolute;  /* 絶対配置 */
+  top: 50%;            /* 画面中央 */
+  left: 50%;           /* 画面中央 */
+  transform: translate(-50%, -50%); /* 中央配置 */
+  font-size: 2em;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  opacity: 0; /* 初めは非表示 */
+  animation: fadeIn 1s forwards;
+}
+
+/* 赤文字のNOW!メッセージ */
+.message-red {
+  color: red;
+  font-size: 2.5em;
+}
+
+/* メッセージのフェードインアニメーション */
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* 回転する画像 */
+.rotate {
+  animation: rotation 5s infinite linear;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* スマホ画面向けメディアクエリ */
+@media screen and (max-width: 768px) {
+  #title-image {
+    max-width: 90%; /* スマホ画面ではタイトル画像を少し大きく */
+  }
+  #donut, #egg {
+    max-width: 80%; /* スマホ画面ではケーキ画像とイースターエッグを大きめに表示 */
+  }
+  .message {
+    font-size: 1.5em; /* メッセージの文字サイズを小さく */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  #title-image {
+    max-width: 80%; /* 小さい画面向けのタイトルサイズを大きめに */
+  }
+  #donut, #egg {
+    max-width: 70%; /* 小さい画面向けのケーキとイースターエッグのサイズ */
+  }
+}
+
+/* その他のスタイル */
+
+/* ボタンのスタイル */
+button {
+    font-size: 22px;
+    color: #eee;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    padding: 5px;
+    border: none;
+    border-radius: 2px;
+    outline: none;
+    background: black;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+    opacity: 0.8;
+    cursor: pointer;
+    transition: all 0.4s ease-out;
+}
+
+button.fade:hover {
+  opacity: 0.8;
+}
+
+.fade {
+  opacity: 0.2;
+  top: 0;
+  left: 0;
+  transform: translate(0, 0);
+}
